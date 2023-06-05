@@ -1,3 +1,91 @@
 <resources>
-    <string name="app_name">Android_MapDiary</string>
+    <string name="app_name">MapDiary</string>
+
+    <string name="fail_to_connect">연결에 실패했습니다.</string>
+    <string name="retry">다시 시도</string>
+    <string name="my_profile">내정보</string>
+
+    <!-- preferences -->
+    <string name="preference_file_key">hanstargram</string>
+    <string name="prefs_has_user_info">shownWelcomePage</string>
+
+    <!-- Login -->
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="failed_to_sign_in">로그인에 실패했습니다.</string>
+    <string name="login">로그인</string>
+    <string name="do_not_have_account">혹시 회원이 아니신가요?</string>
+    <string name="sign_up">가입하기</string>
+    <string name="create_account">회원가입</string>
+    <string name="email_is_not_valid">이메일 형식이 아닙니다.</string>
+    <string name="password_is_not_valid">비밀번호는 최소 6자 입니다.</string>
+    <string name="failed_to_sign_up">가입에 실패했습니다. 이미 존재하는 이메일 일 수 있습니다.</string>
+    <string name="failed_to_login">로그인에 실패했습니다. 인터넷 연결을 확인해주세요.</string>
+
+    <!-- Welcome -->
+    <string name="welcome">환영합니다!</string>
+    <string name="please_input_your_info">정보를 입력해주세요.</string>
+    <string name="select_user_image">회원 이미지 선택</string>
+    <string name="input_name">이름 입력…</string>
+    <string name="done">완료</string>
+    <string name="failed_to_save_data">데이터 저장을 실패했습니다.</string>
+    <string name="loading">로딩중…</string>
+    <string name="remove_image">이미지 제거</string>
+    <string-array name="image_options">
+        <item>갤러리에서 선택</item>
+        <item>기본 이미지로 변경</item>
+    </string-array>
+
+    <!-- Post -->
+    <string name="follow_some_people">친구를 팔로우하여 게시글을 확인하세요.</string>
+    <string name="post_more_button_content_description">게시글 더보기 버튼</string>
+    <string name="post_image_content_description">게시글 이미지</string>
+    <string name="like_button">좋아요 버튼</string>
+    <string name="like_count">좋아요 %d개</string>
+    <string name="empty">텅</string>
+    <string name="edit_button">편집 버튼</string>
+    <string name="remove_button">삭제 버튼</string>
+    <string name="edit">편집하기</string>
+    <string name="delete">삭제하기</string>
+    <string name="are_you_sure_you_want_to_delete">정말로 삭제할까요?</string>
+    <string name="delete_post">게시글 삭제</string>
+    <string name="cancel">취소</string>
+    <string name="failed_to_toggle_like_button">좋아요 토글을 실패했습니다.</string>
+    <string name="failed_to_delete_post">게시글 삭제에 실패했습니다.</string>
+    <string name="post_deleted">게시글을 삭제했습니다.</string>
+
+    <!-- Search -->
+    <string name="search">검색</string>
+    <string name="clear_query_content_description">검색어 삭제 버튼</string>
+    <string name="user_image">회원 사진</string>
+    <string name="search_user">회원 검색…</string>
+
+
+    <!-- Profile -->
+    <string name="profile_follow_success">팔로우 했습니다.</string>
+    <string name="profile_follow_cancle">팔로우를 취소 했습니다.</string>
+    <string name="profile_error_temp">임시 에러 메시지</string>
+    <string name="profile_post">게시글</string>
+    <string name="profile_follower">팔로워</string>
+    <string name="profile_followee">팔로잉</string>
+    <string name="profile_button_modify">프로필 수정</string>
+    <string name="profile_button_follow">팔로우</string>
+    <string name="profile_button_follow_cancle">팔로우 취소</string>
+    <string name="profile_post_description">프로필 포스트</string>
+
+    <!-- Posting -->
+    <string name="image_expression">문구 입력…</string>
+    <string name="post_button">공유</string>
+    <string name="failed_to_upload">업로드에 실패했습니다.</string>
+    <string name="uploading">게시중…</string>
+    <string name="toolBar_post_add_button">게시글 추가 버튼</string>
+    <string name="posting_title">게시글 작성</string>
+
+    <!-- Profile Edit -->
+    <string name="profile_edit_imgButton">프로필 사진 변경</string>
+    <string name="profile_edit_name">이름</string>
+    <string name="profile_edit_introduce">소개</string>
+    <string name="profile_edit_title">프로필 편집</string>
+    <string name="success_to_change_profile">프로필을 변경 하였습니다.</string>
+    <string name="cant_name_is_empty">이름을 공백으로 설정할 수 없습니다.</string>
 </resources>
