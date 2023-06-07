@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/profileImage"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="@+id/profileImage"
-        tools:text="김민성" />
+        tools:text="이름이 들어가는 공간" />
 
     <ImageButton
         android:id="@+id/more_info_button"
