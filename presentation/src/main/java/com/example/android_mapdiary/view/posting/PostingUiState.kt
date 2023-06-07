@@ -5,6 +5,8 @@ import androidx.annotation.StringRes
 
 data class PostingUiState(
     val selectedImage: Uri? = null,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
     @StringRes
     val userMessage: Int? = null,
     val isCreating: Boolean = true,

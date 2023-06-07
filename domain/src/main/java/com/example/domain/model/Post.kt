@@ -10,5 +10,7 @@ data class Post(
     val likeCount: Int,
     val meLiked: Boolean,
     val isMine: Boolean,
-    val timeAgo: String
+    val timeAgo: String,
+    val latitude: Double,
+    val longitude: Double,
 )

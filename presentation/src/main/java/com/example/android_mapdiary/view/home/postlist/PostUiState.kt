@@ -22,7 +22,9 @@ data class PostItemUiState(
     val likeCount: Int,
     val meLiked: Boolean,
     val isMine: Boolean,
-    val timeAgo: String
+    val timeAgo: String,
+    val latitude: Double,
+    val longitude: Double,
 )
 
 fun Post.toUiState() = PostItemUiState(
@@ -35,5 +37,7 @@ fun Post.toUiState() = PostItemUiState(
     likeCount = likeCount,
     meLiked = meLiked,
     isMine = isMine,
-    timeAgo = timeAgo
+    timeAgo = timeAgo,
+    latitude = latitude,
+    longitude = longitude
 )

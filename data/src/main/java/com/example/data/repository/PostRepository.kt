@@ -155,7 +155,9 @@ object PostRepository {
 
     suspend fun uploadPost(
         content: String,
-        imageUri: Uri
+        imageUri: Uri,
+        latitude: Double,
+        longitude: Double
     ): Result<Unit> {
         val currentUser = Firebase.auth.currentUser
         require(currentUser != null)
@@ -178,7 +180,9 @@ object PostRepository {
                 writerUuid = currentUser.uid,
                 content = content,
                 imageUrl = imageFileName,
-                dateTime = Date()
+                dateTime = Date(),
+                longitude = longitude,
+                latitude = latitude
             )
             postCollection.document(postUuid).set(postDto).await()
             Result.success(Unit)

@@ -19,6 +19,15 @@ class PostingViewModel : ViewModel() {
         _uiState.update { it.copy(selectedImage = uri) }
     }
 
+    fun settingLocation(latitude: Double, longitude: Double) {
+        _uiState.update {
+            it.copy(
+                latitude = latitude,
+                longitude = longitude
+            )
+        }
+    }
+
     fun changeToEditMode() {
         _uiState.update { it.copy(isCreating = false) }
     }
@@ -26,7 +35,12 @@ class PostingViewModel : ViewModel() {
     fun uploadContent(content: String) {
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            val result = PostRepository.uploadPost(content, uiState.value.selectedImage!!)
+            val result = PostRepository.uploadPost(
+                content = content,
+                imageUri = uiState.value.selectedImage!!,
+                latitude = uiState.value.latitude!!,
+                longitude = uiState.value.longitude!!
+            )
             if (result.isSuccess) {
                 _uiState.update { it.copy(successToUpload = true, isLoading = false) }
             } else {
