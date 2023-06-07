@@ -10,7 +10,7 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:id="@+id/info_linearLayout"
@@ -29,6 +29,94 @@
             android:scaleType="centerCrop"
             app:shapeAppearance="@style/roundedImageViewRounded" />
 
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:textAlignment="center">
+
+            <TableRow
+                android:id="@+id/profile_info_num_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/profile_info_postnum_textview"
+                    style="?attr/textAppearanceTitleLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textStyle="bold"
+                    tools:text="123" />
+
+                <TextView
+                    android:id="@+id/profile_info_followernum_textview"
+                    style="?attr/textAppearanceTitleLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textStyle="bold"
+                    tools:text="123" />
+
+                <TextView
+                    android:id="@+id/profile_info_followeenum_textview"
+                    style="?attr/textAppearanceTitleLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textStyle="bold"
+                    tools:text="123" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/profile_info_text_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/profile_info_posttext_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/profile_post"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnBackground" />
+
+                <TextView
+                    android:id="@+id/profile_info_followertext_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/profile_follower"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnBackground" />
+
+                <TextView
+                    android:id="@+id/profile_info_followingtext_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/profile_followee"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnBackground" />
+            </TableRow>
+
+        </TableLayout>
 
     </LinearLayout>
 

@@ -23,17 +23,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_MapDiary"
         tools:targetApi="31">
+        <activity
+            android:name=".view.userlist.UserListActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="xs783o47y8"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:value="xs783o47y8" />
 
         <activity
             android:name=".view.profile.ProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
         <activity
             android:name=".view.posting.PostingActivity"
             android:exported="false"

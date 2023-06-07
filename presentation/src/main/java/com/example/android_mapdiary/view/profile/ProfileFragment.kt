@@ -24,6 +24,8 @@ import com.example.android_mapdiary.common.themeColor
 import com.example.android_mapdiary.databinding.FragmentProfileBinding
 import com.example.android_mapdiary.view.home.postlist.PostItemUiState
 import com.example.android_mapdiary.view.profile.edit.ProfileEditFragment
+import com.example.android_mapdiary.view.userlist.UserListActivity
+import com.example.android_mapdiary.view.userlist.UserListPageType
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -48,6 +50,7 @@ class ProfileFragment(
         }
 
         initToolbar()
+        initClickEventListeners()
 
         binding.followOrEditButton.setOnClickListener {
             val isMe = viewModel.profileDetailUiState.value.userDetail!!.isMe
@@ -76,6 +79,23 @@ class ProfileFragment(
                 viewModel.profilePostUiState.collect { postUiState ->
                     updatePostUi(postUiState, adapter)
                 }
+            }
+        }
+    }
+
+    private fun initClickEventListeners() {
+        binding.apply {
+            profileInfoFolloweenumTextview.setOnClickListener {
+                startUserListActivity(UserListPageType.FOLLOWING)
+            }
+            profileInfoFollowingtextTextview.setOnClickListener {
+                startUserListActivity(UserListPageType.FOLLOWING)
+            }
+            profileInfoFollowernumTextview.setOnClickListener {
+                startUserListActivity(UserListPageType.FOLLOWER)
+            }
+            profileInfoFollowertextTextview.setOnClickListener {
+                startUserListActivity(UserListPageType.FOLLOWER)
             }
         }
     }
@@ -138,9 +158,11 @@ class ProfileFragment(
                 val colorOnPrimary = themeColor(
                     com.google.android.material.R.attr.colorOnPrimary
                 )
-
                 profileHeaderUsernameTextview.text = userDetail.name
                 profileIntroduceTextview.text = userDetail.introduce
+                profileInfoPostnumTextview.text = userDetail.postCount.toString()
+                profileInfoFollowernumTextview.text = userDetail.followersCount.toString()
+                profileInfoFolloweenumTextview.text = userDetail.followingCount.toString()
 
                 followOrEditButton.isVisible = true
                 if (userDetail.isMe) {
@@ -172,4 +194,10 @@ class ProfileFragment(
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProfileBinding
         get() = FragmentProfileBinding::inflate
+
+    private fun startUserListActivity(type: UserListPageType) {
+        val user = requireNotNull(viewModel.profileDetailUiState.value.userDetail)
+        val intent = UserListActivity.getIntent(requireContext(), type, user.uuid)
+        startActivity(intent)
+    }
 }

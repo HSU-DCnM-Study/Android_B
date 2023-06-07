@@ -34,7 +34,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
 class PostListFragment(
     private val toolbarTitle: String? = null,
     private val targetUserUuid: String? = null,
@@ -205,5 +204,4 @@ class PostListFragment(
         val intent = PostingActivity.getIntent(requireContext())
         launcher.launch(intent)
     }
-
 }
