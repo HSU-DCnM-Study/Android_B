@@ -18,7 +18,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.android_mapdiary.R
 import com.example.android_mapdiary.common.ViewBindingActivity
 import com.example.android_mapdiary.databinding.ActivityUserInfoBinding
-import com.example.android_mapdiary.home.HomeActivity
+import com.example.android_mapdiary.view.home.HomeActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch

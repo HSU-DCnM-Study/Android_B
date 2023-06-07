@@ -1,4 +1,4 @@
-package com.example.android_mapdiary.home.postlist
+package com.example.android_mapdiary.view.home.postlist
 
 import android.annotation.SuppressLint
 import android.graphics.Typeface

@@ -7,11 +7,6 @@
 
     <fragment
         android:id="@+id/postListFragment"
-        android:name="io.foundy.hanstargram.view.home.postlist.PostListFragment"
-        tools:layout="@layout/fragment_post_list"/>
-
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="io.foundy.hanstargram.view.home.search.SearchFragment"
-        tools:layout="@layout/fragment_search"/>
+        android:name="com.example.android_mapdiary.view.home.postlist.PostListFragment"
+        tools:layout="@layout/fragment_post_list" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.android_mapdiary.posting
+package com.example.android_mapdiary.view.posting
 
 import android.content.Context
 import android.content.Intent

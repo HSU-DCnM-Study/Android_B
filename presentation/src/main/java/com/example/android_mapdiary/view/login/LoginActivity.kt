@@ -12,7 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.android_mapdiary.R
 import com.example.android_mapdiary.common.ViewBindingActivity
 import com.example.android_mapdiary.databinding.ActivityLoginBinding
-import com.example.android_mapdiary.home.HomeActivity
+import com.example.android_mapdiary.view.home.HomeActivity
 import com.example.android_mapdiary.view.signup.SignUpActivity
 import com.example.android_mapdiary.view.userInfo.UserInfoActivity
 import com.google.android.material.snackbar.Snackbar

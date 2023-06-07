@@ -1,4 +1,4 @@
-package com.example.android_mapdiary.home.postlist
+package com.example.android_mapdiary.view.home.postlist
 
 import android.app.Activity
 import android.content.Intent
@@ -24,8 +24,8 @@ import com.example.android_mapdiary.common.ViewBindingFragment
 import com.example.android_mapdiary.common.registerObserverForScrollToTop
 import com.example.android_mapdiary.common.setListeners
 import com.example.android_mapdiary.databinding.FragmentPostListBinding
-import com.example.android_mapdiary.home.HomeActivity.Companion.getIntent
-import com.example.android_mapdiary.posting.PostingActivity
+import com.example.android_mapdiary.view.posting.PostingActivity
+import com.example.android_mapdiary.view.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar

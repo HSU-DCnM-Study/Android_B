@@ -26,23 +26,34 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="xs783o47y8" />
+            android:value="xs783o47y8"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name=".posting.PostingActivity"
-            android:exported="false" />
+            android:name=".view.profile.ProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <activity
-            android:name=".home.HomeActivity"
-            android:exported="false" />
+            android:name=".view.posting.PostingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".view.home.HomeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".view.userInfo.UserInfoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".view.signup.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".view.login.LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
