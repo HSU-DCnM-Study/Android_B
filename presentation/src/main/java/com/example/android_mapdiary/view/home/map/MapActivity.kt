@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.android_mapdiary.common.ViewBindingActivity
 import com.example.android_mapdiary.databinding.ActivityMapBinding
+import com.example.android_mapdiary.view.home.map.postDetail.PostDetailActivity
+import com.example.android_mapdiary.view.home.postlist.PostItemUiState
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
@@ -100,10 +102,15 @@ class MapActivity : ViewBindingActivity<ActivityMapBinding>(), OnMapReadyCallbac
             marker.icon = MarkerIcons.GREEN
             marker.width = Marker.SIZE_AUTO
             marker.height = Marker.SIZE_AUTO
-            marker.iconTintColor = Color.MAGENTA
+            if (it.isMine) {
+                marker.iconTintColor = Color.GREEN
+            } else {
+                marker.iconTintColor = Color.MAGENTA
+            }
             marker.captionText = it.writerName
             marker.captionTextSize = 16f
-            marker.tag = it.writerName
+            marker.tag = it
+            marker.onClickListener = this
 
         }
     }
@@ -146,13 +153,24 @@ class MapActivity : ViewBindingActivity<ActivityMapBinding>(), OnMapReadyCallbac
 
     override fun onClick(p0: Overlay): Boolean {
         if (p0 is Marker) {
-            val post = p0.tag.toString()
-            Log.d("post", post)
-
-
+            val post = p0.tag as PostItemUiState
+            Log.d("post", post.toString())
+            navigateToPostDetail(post)
 
             return true
         }
         return false
+    }
+
+    private fun navigateToPostDetail(post: PostItemUiState) {
+        val intent = PostDetailActivity.getIntent(
+            this,
+            writerName = post.writerName,
+            writerProfileImageUrl = post.writerProfileImageUrl,
+            content = post.content,
+            imageUrl = post.imageUrl,
+            timeAgo = post.timeAgo
+        )
+        startActivity(intent)
     }
 }

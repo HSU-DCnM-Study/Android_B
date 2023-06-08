@@ -24,6 +24,9 @@
         android:theme="@style/Theme.Android_MapDiary"
         tools:targetApi="31">
         <activity
+            android:name=".view.home.map.postDetail.PostDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.home.map.MapActivity"
             android:exported="false" />
         <activity
