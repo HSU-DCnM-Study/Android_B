@@ -48,9 +48,6 @@ class PostPagingSource(
             val nextPage = queryPosts.startAfter(lastVisiblePost).get().await()
             val postDtos = currentPage.toObjects(PostDto::class.java)
             val posts = postDtos
-                .filter { postDto ->
-                    writerUuidList.contains(postDto.writerUuid)
-                }
                 .map { postDto ->
                     val likes = likeCollection.whereEqualTo("postUuid", postDto.uuid).get().await()
                         .toObjects(LikeDto::class.java)

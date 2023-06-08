@@ -7,8 +7,8 @@
     <string name="my_profile">내정보</string>
 
     <!-- preferences -->
-    <string name="preference_file_key">hanstargram</string>
-    <string name="prefs_has_user_info">shownWelcomePage</string>
+    <string name="preference_file_key">MapDiary</string>
+    <string name="prefs_has_user_info">showWelcomePage</string>
 
     <!-- Login -->
     <string name="email">이메일</string>

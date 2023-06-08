@@ -3,8 +3,6 @@ package com.example.android_mapdiary.view.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.repository.AuthRepository
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -14,9 +12,6 @@ class LoginViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState = _uiState.asStateFlow()
-
-    val signedIn: Boolean
-        get() = AuthRepository.isSignedIn()
 
     fun updateEmail(email: String) {
         _uiState.update { it.copy(email = email) }
@@ -42,17 +37,6 @@ class LoginViewModel : ViewModel() {
                     )
                 }
             }
-        }
-    }
-
-    fun checkUserInfoExists(hasUserInfoCallback: (Boolean) -> Unit) {
-        val uid = Firebase.auth.currentUser?.uid
-        if (uid == null) {
-            hasUserInfoCallback(false)
-            return
-        }
-        AuthRepository.hasUserInfo(uid) {
-            hasUserInfoCallback(it)
         }
     }
 

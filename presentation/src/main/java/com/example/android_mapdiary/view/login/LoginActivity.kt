@@ -1,6 +1,5 @@
 package com.example.android_mapdiary.view.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import com.example.android_mapdiary.common.ViewBindingActivity
 import com.example.android_mapdiary.databinding.ActivityLoginBinding
 import com.example.android_mapdiary.view.home.HomeActivity
 import com.example.android_mapdiary.view.signup.SignUpActivity
-import com.example.android_mapdiary.view.userInfo.UserInfoActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -28,23 +26,6 @@ class LoginActivity : ViewBindingActivity<ActivityLoginBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (viewModel.signedIn) {
-            val sharedPreferences = getSharedPreferences(
-                getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE
-            )
-            val hasUserInfo = sharedPreferences.getBoolean(
-                getString(R.string.prefs_has_user_info),
-                false
-            )
-            if (hasUserInfo) {
-                navigateToHomeView()
-            } else {
-                navigateToWelcomeView()
-            }
-        }
-
         initEventListeners()
 
         lifecycleScope.launch {
@@ -88,7 +69,7 @@ class LoginActivity : ViewBindingActivity<ActivityLoginBinding>() {
         }
 
         if (uiState.successToSignIn) {
-            onSuccessToLogin()
+            navigateToHomeView()
         }
         if (uiState.userMessage != null) {
             showSnackBar(uiState.userMessage)
@@ -97,24 +78,6 @@ class LoginActivity : ViewBindingActivity<ActivityLoginBinding>() {
         binding.signInButton.apply {
             isEnabled = uiState.isInputValid && !uiState.isLoading
             setText(if (uiState.isLoading) R.string.loading else R.string.login)
-        }
-    }
-
-    private fun onSuccessToLogin() {
-        viewModel.checkUserInfoExists { exists ->
-            if (exists) {
-                val sharedPreferences = getSharedPreferences(
-                    getString(R.string.preference_file_key),
-                    Context.MODE_PRIVATE
-                )
-                sharedPreferences.edit()
-                    .putBoolean(getString(R.string.prefs_has_user_info), true)
-                    .apply()
-
-                navigateToHomeView()
-            } else {
-                navigateToWelcomeView()
-            }
         }
     }
 
@@ -129,14 +92,6 @@ class LoginActivity : ViewBindingActivity<ActivityLoginBinding>() {
 
     private fun navigateToHomeView() {
         val intent = HomeActivity.getIntent(this).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_TASK_ON_HOME
-        }
-        startActivity(intent)
-        finish()
-    }
-
-    private fun navigateToWelcomeView() {
-        val intent = UserInfoActivity.getIntent(this).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_TASK_ON_HOME
         }
         startActivity(intent)

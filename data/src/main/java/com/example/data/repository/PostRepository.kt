@@ -40,13 +40,7 @@ object PostRepository {
                 .get()
                 .await()
             val postDtos = postQuerySnapshot.toObjects(PostDto::class.java)
-            val result = UserRepository.getFollowingList()
             val posts = postDtos
-                .filter { postDto ->
-                    result.getOrNull()!!.map { it.followeeUuid }.toMutableList().apply {
-                        add(currentUser.uid)
-                    }.contains(postDto.writerUuid)
-                }
                 .map { postDto ->
                     val likes = likeCollection.whereEqualTo("postUuid", postDto.uuid).get().await()
                         .toObjects(LikeDto::class.java)
