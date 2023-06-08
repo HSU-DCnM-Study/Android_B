@@ -10,9 +10,4 @@
         android:name="com.example.android_mapdiary.view.home.postlist.PostListFragment"
         tools:layout="@layout/fragment_post_list" />
 
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.example.android_mapdiary.view.home.map.MapFragment"
-        tools:layout="@layout/fragment_map" />
-
 </navigation>

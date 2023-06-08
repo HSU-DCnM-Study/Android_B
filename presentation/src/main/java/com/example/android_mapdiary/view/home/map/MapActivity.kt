@@ -1,35 +1,32 @@
 package com.example.android_mapdiary.view.home.map
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.net.toUri
-import androidx.fragment.app.viewModels
+import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.paging.map
-import com.example.android_mapdiary.R
-import com.example.android_mapdiary.common.ViewBindingFragment
-import com.example.android_mapdiary.common.toBitmap
-import com.example.android_mapdiary.databinding.FragmentMapBinding
+import com.example.android_mapdiary.common.ViewBindingActivity
+import com.example.android_mapdiary.databinding.ActivityMapBinding
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
-import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 import kotlinx.coroutines.launch
 
-class MapFragment : ViewBindingFragment<FragmentMapBinding>(), OnMapReadyCallback,
+class MapActivity : ViewBindingActivity<ActivityMapBinding>(), OnMapReadyCallback,
     Overlay.OnClickListener {
 
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentMapBinding
-        get() = FragmentMapBinding::inflate
+    override val bindingInflater: (LayoutInflater) -> ActivityMapBinding
+        get() = ActivityMapBinding::inflate
 
     private lateinit var map: NaverMap
     private val viewModel: MapViewModel by viewModels()
@@ -40,14 +37,19 @@ class MapFragment : ViewBindingFragment<FragmentMapBinding>(), OnMapReadyCallbac
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+
+        fun getIntent(context: Context): Intent {
+            return Intent(context, MapActivity::class.java)
+        }
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync(this)
+        viewModel.bind()
 
+        initEvent()
     }
 
     override fun onMapReady(Map: NaverMap) {
@@ -56,9 +58,8 @@ class MapFragment : ViewBindingFragment<FragmentMapBinding>(), OnMapReadyCallbac
         uiSetting.isLocationButtonEnabled = true
         map.locationSource = locationSource
 
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     updateUi(it)
                 }
@@ -66,8 +67,32 @@ class MapFragment : ViewBindingFragment<FragmentMapBinding>(), OnMapReadyCallbac
         }
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
+            return
+        }
+        if (locationSource.onRequestPermissionsResult(
+                requestCode,
+                permissions,
+                grantResults
+            )
+        ) {
+            if (!locationSource.isActivated) {
+                map.locationTrackingMode = LocationTrackingMode.None
+            }
+            return
+        }
+    }
+
     private fun updateUi(uiState: MapUiState) {
-        uiState.pagingData.map {
+
+        uiState.pagingData.forEach {
             val marker = Marker()
             marker.position = LatLng(it.latitude, it.longitude)
             marker.infoWindow
@@ -78,9 +103,16 @@ class MapFragment : ViewBindingFragment<FragmentMapBinding>(), OnMapReadyCallbac
             marker.iconTintColor = Color.MAGENTA
             marker.captionText = it.writerName
             marker.captionTextSize = 16f
+            marker.tag = it.writerName
+
         }
     }
 
+    private fun initEvent() {
+        binding.postBackButton.setOnClickListener {
+            finish()
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -107,18 +139,20 @@ class MapFragment : ViewBindingFragment<FragmentMapBinding>(), OnMapReadyCallbac
         binding.mapView.onStop()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.mapView.onDestroy()
-    }
-
     override fun onLowMemory() {
         super.onLowMemory()
         binding.mapView.onLowMemory()
     }
 
     override fun onClick(p0: Overlay): Boolean {
-        TODO("Not yet implemented")
-    }
+        if (p0 is Marker) {
+            val post = p0.tag.toString()
+            Log.d("post", post)
 
+
+
+            return true
+        }
+        return false
+    }
 }

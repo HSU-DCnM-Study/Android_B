@@ -2,10 +2,6 @@ package com.example.android_mapdiary.view.home.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import androidx.paging.map
-import com.example.android_mapdiary.view.home.postlist.PostItemUiState
 import com.example.android_mapdiary.view.home.postlist.toUiState
 import com.example.data.repository.AuthRepository
 import com.example.data.repository.PostRepository
@@ -24,25 +20,16 @@ class MapViewModel : ViewModel() {
 
     private var bounded = false
 
-    fun bind(targetUserUuid: String?, initPostPagingData: PagingData<PostItemUiState>?) {
+    fun bind() {
         if (bounded) return
         bounded = true
-        if (initPostPagingData != null) {
-            _uiState.update { it.copy(pagingData = initPostPagingData) }
-        }
         viewModelScope.launch(Dispatchers.IO) {
-            val pagingFlow = if (targetUserUuid != null) {
-                PostRepository.getPostDetailsByUser(targetUserUuid)
-            } else {
-                PostRepository.getHomeFeeds()
+            val pagingFlow = PostRepository.getMapFeeds()
+            _uiState.update { uiState ->
+                uiState.copy(pagingData = pagingFlow.map { it.toUiState() })
             }
-            pagingFlow.cachedIn(viewModelScope)
-                .collect { pagingData ->
-                    _uiState.update { uiState ->
-                        uiState.copy(pagingData = pagingData.map { it.toUiState() })
-                    }
-                }
         }
+
     }
 
     fun userMessageShown() {

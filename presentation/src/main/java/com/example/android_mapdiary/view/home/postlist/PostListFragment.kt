@@ -24,6 +24,7 @@ import com.example.android_mapdiary.common.ViewBindingFragment
 import com.example.android_mapdiary.common.registerObserverForScrollToTop
 import com.example.android_mapdiary.common.setListeners
 import com.example.android_mapdiary.databinding.FragmentPostListBinding
+import com.example.android_mapdiary.view.home.map.MapActivity
 import com.example.android_mapdiary.view.posting.PostingActivity
 import com.example.android_mapdiary.view.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -60,6 +61,7 @@ class PostListFragment(
             onClickUser = ::onClickUser
         )
         initToolbar()
+        initEvent()
         initRecyclerView(adapter)
         initBottomSheetDialog(adapter)
 
@@ -159,6 +161,12 @@ class PostListFragment(
         }
     }
 
+    private fun initEvent() {
+        binding.fab.setOnClickListener {
+            navigateToMapActivity()
+        }
+    }
+
     private fun initRecyclerView(adapter: PostAdapter) {
         binding.apply {
             recyclerView.adapter = adapter.withLoadStateFooter(
@@ -202,6 +210,11 @@ class PostListFragment(
 
     private fun startPostingActivity() {
         val intent = PostingActivity.getIntent(requireContext())
+        launcher.launch(intent)
+    }
+
+    private fun navigateToMapActivity() {
+        val intent = MapActivity.getIntent(requireContext())
         launcher.launch(intent)
     }
 }
