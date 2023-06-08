@@ -9,6 +9,7 @@ import com.example.data.model.LikeDto
 import com.example.data.model.PostDto
 import com.example.data.model.UserDto
 import com.example.data.source.PostPagingSource
+import com.example.data.source.ProfilePagingSource
 import com.example.data.util.timeAgoString
 import com.example.domain.model.Post
 import com.google.firebase.auth.ktx.auth
@@ -104,41 +105,11 @@ object PostRepository {
             require(currentUser != null)
 
             return Pager(PagingConfig(pageSize = PAGE_SIZE)) {
-                PostPagingSource(getWriterUuids = { listOf(uuid) })
+                ProfilePagingSource(getWriterUuids = { listOf(uuid) })
             }.flow
         } catch (e: Exception) {
             e.printStackTrace()
             throw e
-        }
-    }
-
-    suspend fun toggleLike(postUuid: String): Result<Unit> {
-        val currentUser = Firebase.auth.currentUser
-        require(currentUser != null)
-        val db = Firebase.firestore
-        val likeCollection = db.collection("likes")
-
-        return try {
-            val likes = likeCollection
-                .whereEqualTo("userUuid", currentUser.uid)
-                .whereEqualTo("postUuid", postUuid)
-                .get().await().toObjects<LikeDto>()
-
-            if (likes.isEmpty()) {
-                val likeUuid = UUID.randomUUID().toString()
-                val likeDto = LikeDto(
-                    uuid = likeUuid,
-                    userUuid = currentUser.uid,
-                    postUuid = postUuid
-                )
-                likeCollection.document(likeUuid).set(likeDto).await()
-            } else {
-                likeCollection.document(likes.first().uuid).delete().await()
-            }
-
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
         }
     }
 
