@@ -1,4 +1,4 @@
-# Android_B
+# Android_MapDiary
 2023-1학기 진로탐색학점제 Team. 정유정, 이재민
 
 ## 아키텍처 
